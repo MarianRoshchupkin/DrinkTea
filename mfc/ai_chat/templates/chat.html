@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Чат с ботом</title>
+</head>
+<body>
+    <h1>Чат с ботом</h1>
+    <div id="chatBox" style="border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll;"></div>
+    <form id="messageForm">
+        <input type="text" id="messageInput" placeholder="Введите ваше сообщение">
+        <button type="submit">Отправить</button>
+    </form>
+
+    <script>
+        // Функция для добавления сообщения в чат
+        function addMessageToChat(message, isUser) {
+            const chatBox = document.getElementById('chatBox');
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+            messageDiv.textContent = message;
+            chatBox.appendChild(messageDiv);
+
+            // Прокручиваем вниз, чтобы видеть новые сообщения
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        // Функция для ответа на различные запросы
+        function respondToRequest(request) {
+            switch (request) {
+                case 'привет':
+                    return 'Привет! Как я могу помочь?';
+                case 'как дела?':
+                    return 'Я всего лишь компьютерная программа, но спасибо, что спросили!';
+                default:
+                    return 'Извините, я не понимаю.';
+            }
+        }
+
+        // Обработчик отправки формы
+        document.getElementById('messageForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Предотвращаем отправку формы
+            const messageInput = document.getElementById('messageInput');
+            const userMessage = messageInput.value.trim().toLowerCase();
+
+            addMessageToChat(userMessage, true);
+
+            let botResponse = respondToRequest(userMessage);
+            addMessageToChat(botResponse, false);
+
+            // Очищаем поле ввода после отправки сообщения
+            messageInput.value = '';
+        });
+    </script>
+
+    <style>
+        .user-message {
+            text-align: right;
+            margin: 10px 0;
+        }
+
+        .bot-message {
+            text-align: left;
+            margin: 10px 0;
+        }
+    </style>
+</body>
+</html>
+
+
+
