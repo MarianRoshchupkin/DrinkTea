@@ -1,4 +1,7 @@
-from django.shortcuts import render, HttpResponse
+import json
+
+from django.shortcuts import render
+from django.http import JsonResponse
 
 
 def ai_chat(request):
@@ -6,5 +9,6 @@ def ai_chat(request):
 
 
 def ai_request(request):
-    ai_answer = {"ai_request работает"}
-    return HttpResponse(ai_answer)
+    body = json.loads(request.body)
+    ai_answer = {"response": f"ai_request работает {body}"}
+    return JsonResponse(ai_answer)

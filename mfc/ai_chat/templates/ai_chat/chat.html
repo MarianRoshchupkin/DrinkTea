@@ -7,8 +7,8 @@
 <body>
 <h1>Чат с ботом</h1>
 <div id="chatBox" style="border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll;"></div>
-<form id="messageForm" method="POST", action="{% url 'ai_request' %}">
-     {% csrf_token %}
+<form id="messageForm" method="POST" , action="{% url 'ai_request' %}">
+    {% csrf_token %}
     <input type="text" id="messageInput" placeholder="Введите ваше сообщение">
     <button type="submit">Отправить</button>
 </form>
@@ -33,22 +33,27 @@
         event.preventDefault(); // Предотвращаем отправку формы
         const messageInput = document.getElementById('messageInput');
         const userMessage = messageInput.value.trim().toLowerCase();
-
+        if (userMessage == "") {
+            return
+        }
         addMessageToChat(userMessage, true);
         const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
         let botResponse = fetch(this.action, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                     "X-CSRFToken": csrftoken,
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify(userMessage)
-            }
-        ).then(response => response.json())
-        console.log(botResponse)
-        addMessageToChat(botResponse, false);
-
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                "X-CSRFToken": csrftoken,
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(userMessage)
+        })
+            .then(response => response.json())  // Corrected this line
+            .then(botResponse => {// Here you can work with the actual response data
+                addMessageToChat(botResponse.response, false);  // Assuming this function adds messages to your chat
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
         // Очищаем поле ввода после отправки сообщения
         messageInput.value = '';
     });
