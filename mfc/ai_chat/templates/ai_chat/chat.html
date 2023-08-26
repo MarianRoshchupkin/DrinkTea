@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Чат с ботом</title>
+</head>
+<body>
+<h1>Чат с ботом</h1>
+<div id="chatBox" style="border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll;"></div>
+<form id="messageForm" method="POST", action="{% url 'ai_request' %}">
+     {% csrf_token %}
+    <input type="text" id="messageInput" placeholder="Введите ваше сообщение">
+    <button type="submit">Отправить</button>
+</form>
+
+<script>
+    // Функция для добавления сообщения в чат
+    function addMessageToChat(message, isUser) {
+        const chatBox = document.getElementById('chatBox');
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+        messageDiv.textContent = message;
+        chatBox.appendChild(messageDiv);
+
+        // Прокручиваем вниз, чтобы видеть новые сообщения
+        chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Функция для ответа на различные запросы
+
+    // Обработчик отправки формы
+    document.getElementById('messageForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Предотвращаем отправку формы
+        const messageInput = document.getElementById('messageInput');
+        const userMessage = messageInput.value.trim().toLowerCase();
+
+        addMessageToChat(userMessage, true);
+        const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+        let botResponse = fetch(this.action, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                     "X-CSRFToken": csrftoken,
+                    'Accept': 'application/json'
+                },
+                body: JSON.stringify(userMessage)
+            }
+        ).then(response => response.json())
+        console.log(botResponse)
+        addMessageToChat(botResponse, false);
+
+        // Очищаем поле ввода после отправки сообщения
+        messageInput.value = '';
+    });
+</script>
+
+<style>
+    .user-message {
+        text-align: right;
+        margin: 10px 0;
+    }
+
+    .bot-message {
+        text-align: left;
+        margin: 10px 0;
+    }
+</style>
+</body>
+</html>
+
+
+
