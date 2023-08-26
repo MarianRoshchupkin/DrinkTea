@@ -16,8 +16,10 @@ from .ai_model import calculate_similarity, convert_in_vector_massive
 
 
 def ai_chat(request):
-    return render(request, "ai_chat/chat.html")
+    return render(request, "ai_chat/chat_demo.html")
 
+def ai_chat_front(request):
+    return render(request, "ai_chat/chat_front.html")
 
 def ai_request(request):
     request_data = json.loads(request.body)

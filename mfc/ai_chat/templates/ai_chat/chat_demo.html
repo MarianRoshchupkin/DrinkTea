@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Чат с ботом</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<header class="header">
+    <h1 class="header__title">Чат с ботом</h1>
+</header>
+<main>
+    <div id="chatBox" style="border: 1px solid #ccc; padding: 10px; height: 300px; overflow-y: scroll;"></div>
+    <form id="messageForm" class="gpt__query__form" method="POST" action="/ai_request/">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="7tpnIHkpvhsc3cNpLBy2wre0HPbo9wHQg71n4xr4pBvTAEkcnBsEZ2nidMoYyjWm">
+                    <input id="messageInput"  class="gpt__query__input"  type="text" name="text" placeholder="Введите запрос"/>
+                    <button type="submit" class="gpt__query__button">
+                        <span class="gpt__query__button__desc">Отправить</span>
+                    </button>
+                </form>
+</main>
+<script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>

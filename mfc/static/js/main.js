@@ -1,9 +1,18 @@
 function addMessageToChat(message, isUser) {
         const chatBox = document.getElementById('chatBox');
         const messageDiv = document.createElement('div');
-        messageDiv.classList.add(isUser ? 'user-message' : 'bot-message');
+        if (isUser) {
+            messageDiv.classList.add('gpt__dialog__question')
+            const messageP = document.createElement('p');
+            messageP.classList.add('gpt__dialog__desc', 'gpt__dialog__question__desc')
+        }
+        else{
+            messageDiv.classList.add('gpt__dialog__answer')
+            const messageP = document.createElement('p');
+            messageP.classList.add('gpt__dialog__desc', 'gpt__dialog__answer__desc')
+        }
         messageDiv.textContent = message;
-        chatBox.appendChild(messageDiv);
+        chatBox.append(messageDiv);
 
         // Прокручиваем вниз, чтобы видеть новые сообщения
         chatBox.scrollTop = chatBox.scrollHeight;
@@ -40,3 +49,11 @@ document.getElementById('messageForm').addEventListener('submit', function (even
         // Очищаем поле ввода после отправки сообщения
         messageInput.value = '';
     });
+
+const gptDialog = document.querySelector('.gpt__dialog');
+console.log(gptDialog);
+
+new SimpleBar(document.querySelector(".gpt__dialog"), {
+  autoHide: false,
+  scrollbarMaxSize: 70
+})

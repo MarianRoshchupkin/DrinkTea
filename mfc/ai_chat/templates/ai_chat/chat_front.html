@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GPT</title>
+
+    <link rel="stylesheet" href="{% static '/css/normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <!-- Simple Bar -->
+    <link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css"/>
+</head>
+<body>
+<main class="main">
+    <section class="gpt">
+        <section class="gpt__container">
+            <div id="chatBox" class="gpt__dialog">
+
+            </div>
+        </section>
+
+        <section class="gpt__container">
+
+            <div class="gpt__query__container">
+
+                <form id="messageForm" class="gpt__query__form" method="POST" action="{% url 'ai_request' %}">
+                    {% csrf_token %}
+                    <input id="messageInput" class="gpt__query__input" type="text" name="text"
+                           placeholder="Введите запрос"/>
+                    <button type="submit" class="gpt__query__button">
+                        <span class="gpt__query__button__desc">Отправить</span>
+                    </button>
+                </form>
+
+            </div>
+
+        </section>
+
+    </section>
+
+    <section class="logo">
+        <div class="logo__container">
+            <a class="logo__link">
+                <img class="logo__link__img" src="{% static 'img/building.svg' %}" alt="логотип МФЦ"/>
+            </a>
+        </div>
+    </section>
+</main>
+    <script src="https://unpkg.com/simplebar@latest/dist/simplebar.min.js"></script>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
