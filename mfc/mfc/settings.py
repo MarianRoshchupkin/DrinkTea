@@ -21,7 +21,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'solo',
+
     'ai_chat',
+    'options'
 ]
 
 MIDDLEWARE = [
