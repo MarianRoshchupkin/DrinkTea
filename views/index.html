@@ -4,20 +4,67 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GPT</title>
+
+  <link rel="stylesheet" href="./styles/normalize.css">
+  <link rel="stylesheet" href="./styles/styles.css">
+
+  <!-- Simple Bar -->
+  <link rel="stylesheet" href="https://unpkg.com/simplebar@latest/dist/simplebar.css" />
+  <script src="https://unpkg.com/simplebar@latest/dist/simplebar.min.js"></script>
+
+  <script defer src="../public/script.js"></script>
 </head>
 <body>
   <main class="main">
-    <section class="dialog">
-      <div class="dialog__container"></div>
+    <section class="gpt">
+      <section class="gpt__container">
+        <div class="gpt__dialog" data-simplebar>
+          <div class="gpt__dialog__question">
+            <p class="gpt__dialog__desc gpt__dialog__question__desc">
+              Напиши рецепт пирога
+            </p>
+          </div>
+          <div class="gpt__dialog__answer">
+            <p class="gpt__dialog__desc gpt__dialog__answer__desc">
+              Конечно! Вот ваш рецепт. Если у вас нет весов, используйте для измерения ингредиентов столовые ложки. Своё название пирог получил благодаря тому,
+              что для его приготовления нужно по 12 столовых ложек молока, растительного масла, сахара и муки. Пирог получается
+              нежным, пористым, ароматным и очень вкусным. Весь процесс приготовления очень простой и достаточно быстрый, а
+              ингредиенты всегда найдутся на кухне, поэтому такой пирог с легкостью можно приготовить к обычному домашнему чаепитию.
+
+              Продукты (на 8 порций)
+              Молоко - 120 мл
+              Масло растительное (без запаха) - 120 мл + для смазывания формы
+              Яйца (крупные) - 3 шт.
+              Сахар - 180 г
+              Мука - 200 г (12 ст. ложек с горкой)
+              Разрыхлитель - 7 г
+              Ванильный сахар - 10 г
+              Соль - 1 щепотка
+            </p>
+          </div>
+          <div class="gpt__dialog__question">
+            <p class="gpt__dialog__desc gpt__dialog__question__desc">
+              Спасибо!
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="gpt__container">
+        <div class="gpt__query__container">
+          <form class="gpt__query__form" method="post" action="/" encType="application/x-www-form-urlencoded">
+            <input class="gpt__query__input" type="text" name="text" placeholder="Введите запрос" />
+            <button class="gpt__query__button">
+              <span class="gpt__query__button__desc">Отправить</span>
+            </button>
+          </form>
+        </div>
+      </section>
     </section>
-    <section class="query">
-      <div class="query__container">
-        <form class="query__form" method="post" action="/" encType="application/x-www-form-urlencoded">
-          <input class="query__input" type="text" name="text" />
-          <button class="query__button">
-            <span class="query__button__desc">Отправить</span>
-          </button>
-        </form>
+    <section class="logo">
+      <div class="logo__container">
+        <a class="logo__link">
+          <img class="logo__link__img" src="./images/building.svg" alt="логотип МФЦ" />
+        </a>
       </div>
     </section>
   </main>
