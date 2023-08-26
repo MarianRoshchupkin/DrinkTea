@@ -93,3 +93,4 @@ TEST = {
         'NAME': ':memory:',
     }
 }
+DJANGO_TEST_PROBABILITY = os.environ.get("DJANGO_TEST_PROBABILITY", 0.2)
