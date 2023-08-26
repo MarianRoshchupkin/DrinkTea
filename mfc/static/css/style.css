@@ -1,0 +1,16 @@
+.user-message {
+    text-align: right;
+    margin: 10px 0;
+}
+
+.bot-message {
+    text-align: left;
+    margin: 10px 0;
+}
+
+#chatBox {
+    border: 1px solid #ccc;
+    padding: 10px;
+    height: 300px;
+    overflow-y: scroll;
+}
