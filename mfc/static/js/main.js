@@ -1,17 +1,20 @@
 function addMessageToChat(message, isUser) {
-        const chatBox = document.getElementById('chatBox');
+        const chatBox = document.getElementsByClassName('gpt__dialog');
         const messageDiv = document.createElement('div');
+        const messageP = document.createElement('p');
+
         if (isUser) {
             messageDiv.classList.add('gpt__dialog__question')
-            const messageP = document.createElement('p');
             messageP.classList.add('gpt__dialog__desc', 'gpt__dialog__question__desc')
+            messageP.textContent = message;
+            messageDiv.append(messageP)
         }
         else{
             messageDiv.classList.add('gpt__dialog__answer')
-            const messageP = document.createElement('p');
             messageP.classList.add('gpt__dialog__desc', 'gpt__dialog__answer__desc')
+            messageP.textContent = message;
+            messageDiv.append(messageP)
         }
-        messageDiv.textContent = message;
         chatBox.append(messageDiv);
 
         // Прокручиваем вниз, чтобы видеть новые сообщения

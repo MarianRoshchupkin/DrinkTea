@@ -2,24 +2,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600;700&display=swap');
 
 :root {
-  --primary: #116ACC;
-  --secondary1: #182233;
-  --secondary2: #B3CEE2;
-  --secondary3: #D9DDE7;
-  --secondary4: #FD4E5D;
   --black: #000000;
-  --grey1: #1F2937;
-  --grey2: #374151;
-  --grey3: #4B5563;
-  --grey4: #6B7280;
-  --grey5: #9CA3AF;
-  --grey6: #D1D5DB;
-  --grey7: #F3F4F6;
   --white: #ffffff;
-  --info: #A0C3FF;
-  --success: #76CA66;
-  --warning: #E2B93B;
-  --error: #BA0000;
   --brown: #623B2A;
   --darkBrown: #543426;
   --darkestBrown: #362118;
