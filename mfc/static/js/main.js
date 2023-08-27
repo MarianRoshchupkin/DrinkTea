@@ -1,8 +1,8 @@
 // Simple Bar
-new SimpleBar(document.querySelector(".gpt__dialog"), {
-    autoHide: false,
-    scrollbarMaxSize: 70
-})
+// new SimpleBar(document.querySelector(".gpt__dialog"), {
+//     autoHide: false,
+//     scrollbarMaxSize: 70
+// })
 
 function addMessageToChat(message, isUser) {
     const chatBox = document.querySelector('.gpt__dialog');
