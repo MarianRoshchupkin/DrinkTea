@@ -1,12 +1,14 @@
 import json
 import numpy as np
 import pandas as pd
+import random
 
 from django.shortcuts import render, HttpResponse
 from django.contrib.auth.decorators import user_passes_test
 from django.http import JsonResponse
 
 from options.models import Options
+from .check import chek_question
 
 from .models import QuestionAnswering
 from .ai_model import calculate_similarity, convert_in_vector_massive
@@ -14,7 +16,9 @@ from .ai_model import calculate_similarity, convert_in_vector_massive
 # QUESTIONS_IN_VECTOR_FORMAT = convert_in_vector_massive(list(
 #     QuestionAnswering.objects.values_list('question_in_text_form', flat=True)))
 
+test_list = ["вы ввели некорректный запрос", "я не отвечаю на такие запросы", "Я не могу реагировать на такие запросы.", "Некоторые запросы я не могу обработать, извините.", "К сожалению, не могу ответить на этот запрос в связи со своими ограничениями."]
 
+print(random.choice(test_list))
 def ai_chat(request):
     return render(request, "ai_chat/chat_demo.html")
 
@@ -23,11 +27,16 @@ def ai_chat_front(request):
 
 def ai_request(request):
     request_data = json.loads(request.body)
-    index = int(
-        calculate_similarity(request_data, QuestionAnswering.objects.values_list('question_in_vector_form', flat=True)))
-    response = QuestionAnswering.objects.values_list('question_in_text_form', flat=True)[index]
-    return JsonResponse({"response": response})
+    if chek_question(request_data) == False:
+        return JsonResponse({"response": random.choice(test_list)})
+    else:
 
+        print(chek_question(request_data))
+        index = int(
+            calculate_similarity(request_data,
+                                 QuestionAnswering.objects.values_list('question_in_vector_form', flat=True)))
+        response = QuestionAnswering.objects.values_list('question_in_text_form', flat=True)[index]
+        return JsonResponse({"response": response})
 
 @user_passes_test(lambda user: user.is_superuser)
 def ai_save_dataset(request):
