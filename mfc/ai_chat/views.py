@@ -18,7 +18,6 @@ from .ai_model import calculate_similarity, convert_in_vector_massive
 
 test_list = ["вы ввели некорректный запрос", "я не отвечаю на такие запросы", "Я не могу реагировать на такие запросы.", "Некоторые запросы я не могу обработать, извините.", "К сожалению, не могу ответить на этот запрос в связи со своими ограничениями."]
 
-print(random.choice(test_list))
 def ai_chat(request):
     return render(request, "ai_chat/chat_demo.html")
 
@@ -35,7 +34,7 @@ def ai_request(request):
         index = int(
             calculate_similarity(request_data,
                                  QuestionAnswering.objects.values_list('question_in_vector_form', flat=True)))
-        response = QuestionAnswering.objects.values_list('question_in_text_form', flat=True)[index]
+        response = QuestionAnswering.objects.values_list('answer_in_text_form', flat=True)[index]
         return JsonResponse({"response": response})
 
 @user_passes_test(lambda user: user.is_superuser)
