@@ -14,9 +14,9 @@ $ npm install
 $ npm run dev
 ```
 
-## Author
-Marian Roshchupkin
-Bogdan Roshchupkin
+## Authors
+Marian Roshchupkin &lt;roshchupkin.marian@gmail.com&gt;
+Bogdan Roshchupkin &lt;roshchupkin.marian@gmail.com&gt;
 Li Kirill
 Andrew Utlyakov
 Vladimir Okladnikov
