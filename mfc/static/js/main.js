@@ -1,10 +1,11 @@
 // Simple Bar
-// new SimpleBar(document.querySelector(".gpt__dialog"), {
-//     autoHide: false,
-//     scrollbarMaxSize: 70
-// })
+new SimpleBar(document.querySelector(".gpt__dialog"), {
+    autoHide: false,
+    scrollbarMaxSize: 70
+})
 
 function addMessageToChat(message, isUser) {
+    const simpleBar = document.querySelector('.simplebar-wrapper');
     const chatBox = document.querySelector('.gpt__dialog');
     const messageDiv = document.createElement('div');
     const messageP = document.createElement('p');
@@ -21,7 +22,7 @@ function addMessageToChat(message, isUser) {
         messageP.textContent = message;
         messageDiv.append(messageP)
     }
-    chatBox.append(messageDiv);
+    chatBox.insertBefore(messageDiv, simpleBar);
 
     // Прокручиваем вниз, чтобы видеть новые сообщения
     chatBox.scrollTop = chatBox.scrollHeight;
